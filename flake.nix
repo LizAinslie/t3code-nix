@@ -19,11 +19,13 @@
         stable  = mk sources.stable;
         nightly = mk sources.nightly;
         t3code  = mk sources.stable;
+        inherit update;
       };
 
       apps.x86_64-linux.update = {
         type = "app";
         program = "${update}/bin/update";
+        meta.description = "Bump nix/sources.json";
       };
     };
 }
