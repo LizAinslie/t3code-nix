@@ -1,6 +1,7 @@
-{ lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper
-, glib, gtk3, pango, cairo, at-spi2-core, nss, nspr, expat, dbus, cups
-, alsa-lib, libgbm, libxkbcommon, libsecret, udev, xorg, version ? "0.1.0", url, hash }:
+{ lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper, glib, gtk3, pango,
+  cairo, at-spi2-core, nss, nspr, expat, dbus, cups, alsa-lib, libgbm,
+  libxkbcommon, libsecret, udev, libx11, libxcb, libxext, libxfixes, libxrandr,
+  libxdamage, libxcomposite, version ? "0.1.0", url, hash }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "t3code";
@@ -31,8 +32,7 @@ stdenv.mkDerivation (finalAttrs: {
       nss nspr expat dbus cups alsa-lib
       libgbm libxkbcommon libsecret
       udev
-      xorg.libX11 xorg.libxcb xorg.libXext xorg.libXfixes
-      xorg.libXrandr xorg.libXdamage xorg.libXcomposite
+      libx11 libxcb libxext libxfixes libxrandr libxdamage libxcomposite
   ];
 
   unpackPhase = ''
@@ -43,10 +43,11 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preInstall
 
     mkdir -p $out/opt $out/bin
-    cp -r "opt/T3 Code (Beta)" $out/opt/t3code
+    appdir=$(echo opt/*)   # "opt/T3 Code (Beta)" or "opt/T3 Code (Nightly)"
+    cp -r "$appdir" $out/opt/t3code
     cp -r usr/share $out/share
     substituteInPlace $out/share/applications/t3code.desktop \
-      --replace-fail '"/opt/T3 Code (Beta)/t3code"' t3code
+      --replace-fail "\"/$appdir/t3code\"" t3code
     find $out/opt/t3code -type d \( -name '*-musl' -o -name 'linux-arm64' \) -prune -exec rm -rf {} +
     makeWrapper $out/opt/t3code/t3code $out/bin/t3code \
       --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"

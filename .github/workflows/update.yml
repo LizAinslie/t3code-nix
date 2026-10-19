@@ -1,0 +1,55 @@
+name: update
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Bump sources.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: nix run .#update
+
+      - name: Detect change
+        id: diff
+        run: |
+          if git diff --quiet -- nix/sources.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "stable=$(jq -r .stable.version nix/sources.json)"
+              echo "nightly=$(jq -r .nightly.version nix/sources.json)"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build both channels
+        if: steps.diff.outputs.changed == 'true'
+        run: nix build -L --no-link .#stable .#nightly .#update
+
+      - name: Open PR
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: auto/update
+          delete-branch: true
+          commit-message: "t3code: stable ${{ steps.diff.outputs.stable }}, nightly ${{ steps.diff.outputs.nightly }}"
+          title: "t3code: stable ${{ steps.diff.outputs.stable }}, nightly ${{ steps.diff.outputs.nightly }}"
+          body: |
+            Automated bump from `nix run .#update`. Both channels built in this run.

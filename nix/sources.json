@@ -2,6 +2,11 @@
   "stable": {
     "version": "0.1.0",
     "url": "https://github.com/pingdotgg/t3code/releases/download/v0.1.0/T3-Code-0.1.0-amd64.deb",
-    "hash": "sha256-NZCmPC61vuIbcLIppFhjIu2CFArs2Mf+sJqoAXj4Y5w="
+    "hash": "sha512-kBToUbTCKjrUN8cL/1GI3eSMcktw7ZQAgkDqYIHXV7FCo4ipxLI7OKNzbUZy+QPvtN9krr3QDVMzk8b/mWtbCA=="
+  },
+  "nightly": {
+    "version": "0.1.1-nightly.20261019.3360",
+    "url": "https://github.com/pingdotgg/t3code/releases/download/v0.1.1-nightly.20261019.3360/T3-Code-0.1.1-nightly.20261019.3360-amd64.deb",
+    "hash": "sha512-A9k7av31RP149I2RtAVuVfw9dIT7kPfQj7amQ0Y6kch5a44j808mbuOG5G0j/kGkOV8YaRVCt91qDkPVnUCYkA=="
   }
 }
