@@ -1,10 +1,10 @@
 { lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper
 , glib, gtk3, pango, cairo, at-spi2-core, nss, nspr, expat, dbus, cups
-, alsa-lib, libgbm, libxkbcommon, libsecret, udev, xorg }:
+, alsa-lib, libgbm, libxkbcommon, libsecret, udev, xorg, version ? "0.1.0", url, hash }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "t3code";
-  version = "0.1.0";
+  version = version;
 
   meta = {
     description = "The open-source control plane for coding agents";
@@ -18,8 +18,8 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   src = fetchurl {
-    url = "https://github.com/pingdotgg/t3code/releases/download/v${finalAttrs.version}/T3-Code-${finalAttrs.version}-amd64.deb";
-    hash = "sha256-NZCmPC61vuIbcLIppFhjIu2CFArs2Mf+sJqoAXj4Y5w=";
+    url = url;
+    hash = hash;
   };
 
   # build tools
