@@ -1,12 +1,12 @@
 {
   "stable": {
-    "version": "0.1.0",
-    "url": "https://github.com/pingdotgg/t3code/releases/download/v0.1.0/T3-Code-0.1.0-amd64.deb",
-    "hash": "sha512-kBToUbTCKjrUN8cL/1GI3eSMcktw7ZQAgkDqYIHXV7FCo4ipxLI7OKNzbUZy+QPvtN9krr3QDVMzk8b/mWtbCA=="
+    "version": "0.1.2",
+    "url": "https://github.com/pingdotgg/t3code/releases/download/v0.1.2/T3-Code-0.1.2-amd64.deb",
+    "hash": "sha512-29uObkKVxSwNje6QEUTsa5klwCYp7PDWFxB9SJ0vc40+RR28R2uzxi+3+CIGoHwzpB5SVpSKi07lt4PruGS9Ew=="
   },
   "nightly": {
-    "version": "0.1.1-nightly.20261019.3360",
-    "url": "https://github.com/pingdotgg/t3code/releases/download/v0.1.1-nightly.20261019.3360/T3-Code-0.1.1-nightly.20261019.3360-amd64.deb",
-    "hash": "sha512-A9k7av31RP149I2RtAVuVfw9dIT7kPfQj7amQ0Y6kch5a44j808mbuOG5G0j/kGkOV8YaRVCt91qDkPVnUCYkA=="
+    "version": "0.1.3-nightly.20261024.3630",
+    "url": "https://github.com/pingdotgg/t3code/releases/download/v0.1.3-nightly.20261024.3630/T3-Code-0.1.3-nightly.20261024.3630-amd64.deb",
+    "hash": "sha512-dOyaWqI0moCVkyVqVMKOyxG7HGzdtlrhvtrKe+atP8XJaMpqsqWjbnx8LD64co+uGoF09Sz9T9GVelsXv/4dwg=="
   }
 }
